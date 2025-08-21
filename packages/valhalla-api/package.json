@@ -1,10 +1,27 @@
 {
   "name": "valhalla-api",
   "version": "1.0.0",
-  "description": "VALHALLA REST API service",
-  "main": "api/index.js",
+  "description": "VALHALLA REST API service for Render deployment",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "build": "echo 'No build needed for Render'",
+    "test": "echo 'API tests coming soon'"
+  },
   "dependencies": {
-    "express": "^4.18.0"
+    "express": "^4.18.0",
+    "cors": "^2.8.5",
+    "helmet": "^7.1.0",
+    "dotenv": "^16.3.1",
+    "crypto": "^1.0.1",
+    "axios": "^1.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
   },
   "author": "R3DK3LL",
   "license": "MIT"

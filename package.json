@@ -7,11 +7,18 @@
   ],
   "scripts": {
     "build": "npm run build --workspaces",
-    "test": "npm run test --workspaces"
+    "test": "npm run test --workspaces",
+    "dev": "npm run dev --workspaces",
+    "start:api": "npm start --workspace=packages/valhalla-api",
+    "dev:api": "npm run dev --workspace=packages/valhalla-api",
+    "install:api": "npm install --workspace=packages/valhalla-api"
   },
   "keywords": [
-    "architecture", "evaluation", "full-stack", "devops", "security", "cli", "api"
+    "architecture", "evaluation", "full-stack", "devops", "security", "cli", "api", "render"
   ],
   "author": "R3DK3LL",
-  "license": "MIT"
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
 }
