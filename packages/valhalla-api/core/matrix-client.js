@@ -120,8 +120,7 @@ class MatrixClient {
         
         try {
             // Based on your document structure: LAYER_DEFINITIONS
-            const layerDefs = matrix.LAYER_DEFINITIONS || matrix.layer_definitions || matrix.layers || {};
-            
+            const layerDefs = matrix.weights_pct || matrix.LAYER_DEFINITIONS || matrix.layer_definitions || matrix.layers || {};
             // Convert percentage strings to numbers
             const weights = {};
             for (const [layer, weightStr] of Object.entries(layerDefs)) {
