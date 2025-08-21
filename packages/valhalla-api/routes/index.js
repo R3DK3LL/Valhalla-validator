@@ -14,6 +14,27 @@ router.get('/health', (req, res) => {
   });
 });
 
+// Matrix health check
+router.get('/health/matrix', async (req, res) => {
+  try {
+    const MatrixClient = require('../core/matrix-client');
+    const matrixClient = new MatrixClient();
+    const healthStatus = await matrixClient.healthCheck();
+    
+    res.json({
+      status: 'success',
+      timestamp: new Date().toISOString(),
+      matrix: healthStatus
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: 'error',
+      message: error.message,
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 // Mount route modules
 router.use('/evaluate', evaluateRouter);
 router.use('/generate', generateRouter);
