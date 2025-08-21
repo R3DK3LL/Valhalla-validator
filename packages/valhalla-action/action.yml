@@ -1,0 +1,16 @@
+name: 'VALHALLA Architecture Evaluation'
+description: 'Evaluate repository architecture against VALHALLA standards'
+inputs:
+  api-key:
+    description: 'VALHALLA API key'
+    required: true
+  target-score:
+    description: 'Target architecture score'
+    required: false
+    default: '80'
+outputs:
+  score:
+    description: 'Architecture compliance score'
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

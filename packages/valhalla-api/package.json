@@ -1,0 +1,11 @@
+{
+  "name": "valhalla-api",
+  "version": "1.0.0",
+  "description": "VALHALLA REST API service",
+  "main": "api/index.js",
+  "dependencies": {
+    "express": "^4.18.0"
+  },
+  "author": "R3DK3LL",
+  "license": "MIT"
+}

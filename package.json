@@ -1,0 +1,17 @@
+{
+  "name": "valhalla-validator",
+  "version": "1.0.0",
+  "description": "Enterprise architecture evaluation & generation platform",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "test": "npm run test --workspaces"
+  },
+  "keywords": [
+    "architecture", "evaluation", "full-stack", "devops", "security", "cli", "api"
+  ],
+  "author": "R3DK3LL",
+  "license": "MIT"
+}

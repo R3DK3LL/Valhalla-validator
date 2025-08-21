@@ -1,0 +1,16 @@
+{
+  "name": "@valhalla/cli",
+  "version": "1.0.0",
+  "description": "VALHALLA CLI for architecture evaluation and generation",
+  "main": "src/index.js",
+  "bin": {
+    "valhalla": "./bin/valhalla"
+  },
+  "dependencies": {
+    "commander": "^11.0.0",
+    "chalk": "^5.3.0",
+    "axios": "^1.5.0"
+  },
+  "author": "R3DK3LL",
+  "license": "MIT"
+}
