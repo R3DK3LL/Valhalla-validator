@@ -14,11 +14,17 @@ router.get('/health', (req, res) => {
   });
 });
 
-// Matrix health check
+// Matrix health check with cache clearing option
 router.get('/health/matrix', async (req, res) => {
   try {
     const MatrixClient = require('../core/matrix-client');
     const matrixClient = new MatrixClient();
+    
+    // Clear cache if requested
+    if (req.query.fresh === 'true') {
+      matrixClient.clearCache();
+    }
+    
     const healthStatus = await matrixClient.healthCheck();
     
     res.json({
