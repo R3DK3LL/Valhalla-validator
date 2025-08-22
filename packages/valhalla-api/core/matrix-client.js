@@ -120,7 +120,7 @@ class MatrixClient {
         
         try {
             // Based on your document structure: LAYER_DEFINITIONS
-            const layerDefs = matrix.weights_pct || matrix.LAYER_DEFINITIONS || matrix.layer_definitions || matrix.layers || {};
+            const layerDefs = matrix.EVAL_CRITERIA?.weights_pct || {};
             // Convert percentage strings to numbers
             const weights = {};
             for (const [layer, weightStr] of Object.entries(layerDefs)) {
@@ -440,13 +440,16 @@ Remember: Focus on delivering a comprehensive architecture that addresses all we
     async healthCheck() {
         try {
             const matrix = await this.loadMatrix();
-            const weights = await this.getLayerWeights();
             const cacheStatus = this.getCacheStatus();
+            
+            // Extract from correct matrix structure
+            const layers = matrix.TAXONOMY?.layers || {};
+            const weights = matrix.EVAL_CRITERIA?.weights_pct || {};
             
             return {
                 status: 'healthy',
                 matrixLoaded: true,
-                layerCount: Object.keys(weights).length,
+                layerCount: Object.keys(layers).length,
                 totalWeight: Object.values(weights).reduce((sum, w) => sum + w, 0),
                 cache: cacheStatus,
                 timestamp: new Date().toISOString()
@@ -460,5 +463,4 @@ Remember: Focus on delivering a comprehensive architecture that addresses all we
         }
     }
 }
-
 module.exports = MatrixClient;
