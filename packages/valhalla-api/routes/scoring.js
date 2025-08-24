@@ -6,7 +6,7 @@ const MatrixClient = require('../core/matrix-client');
 const router = express.Router();
 
 // POST /api/test/score - Test architecture scoring against matrix
-router.post('/test/score', async (req, res) => {
+router.post('/score', async (req, res) => {
   try {
     const { architecture } = req.body;
     
