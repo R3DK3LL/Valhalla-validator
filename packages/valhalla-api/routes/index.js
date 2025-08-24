@@ -5,12 +5,13 @@ const router = express.Router();
 const evaluateRouter = require('./evaluate');
 const generateRouter = require('./generate');
 const validateRouter = require('./validate');
+const scoringRouter = require('./scoring');
 
 // Health check for API routes
 router.get('/health', (req, res) => {
   res.json({
     status: 'API routes healthy',
-    endpoints: ['/evaluate', '/generate', '/validate']
+    endpoints: ['/evaluate', '/generate', '/validate', '/test']
   });
 });
 
@@ -45,5 +46,6 @@ router.get('/health/matrix', async (req, res) => {
 router.use('/evaluate', evaluateRouter);
 router.use('/generate', generateRouter);
 router.use('/validate', validateRouter);
+router.use('/test', scoringRouter);
 
 module.exports = router;
