@@ -58,4 +58,23 @@ router.post('/score', async (req, res) => {
   }
 });
 
+// GET /debug - Debug endpoint to examine matrix structure
+router.get('/debug', async (req, res) => {
+  try {
+    const matrixClient = new MatrixClient();
+    const matrix = matrixClient.getMatrix();
+    
+    // Show the actual structure
+    res.json({
+      matrixExists: !!matrix,
+      matrixKeys: matrix ? Object.keys(matrix) : null,
+      taxonomy: matrix?.TAXONOMY ? Object.keys(matrix.TAXONOMY) : null,
+      layers: matrix?.TAXONOMY?.layers ? Object.keys(matrix.TAXONOMY.layers) : null,
+      sampleLayer: matrix?.TAXONOMY?.layers ? Object.values(matrix.TAXONOMY.layers)[0] : null
+    });
+  } catch (error) {
+    res.json({ error: error.message });
+  }
+});
+
 module.exports = router;
