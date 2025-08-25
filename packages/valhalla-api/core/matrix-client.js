@@ -188,19 +188,32 @@ class MatrixClient {
      * Get keywords for layer scoring
      */
     getLayerKeywords(layer) {
-        const keywordMap = {
-            FRONTEND_UI_WEIGHT: ['frontend', 'ui', 'user interface', 'react', 'vue', 'angular', 'component', 'css', 'html', 'javascript'],
-            BACKEND_API_WEIGHT: ['backend', 'api', 'server', 'rest', 'graphql', 'microservice', 'service', 'endpoint', 'controller'],
-            DATA_LAYER_WEIGHT: ['database', 'data', 'storage', 'sql', 'nosql', 'mongodb', 'postgresql', 'redis', 'model', 'schema'],
-            ML_SERVICES_WEIGHT: ['machine learning', 'ml', 'ai', 'model', 'tensorflow', 'pytorch', 'data science', 'algorithm'],
-            DEVOPS_CICD_WEIGHT: ['devops', 'ci/cd', 'pipeline', 'docker', 'kubernetes', 'deployment', 'automation', 'jenkins'],
-            INFRA_RUNTIME_WEIGHT: ['infrastructure', 'cloud', 'aws', 'azure', 'gcp', 'container', 'kubernetes', 'runtime'],
-            OBSERVABILITY_WEIGHT: ['monitoring', 'logging', 'metrics', 'tracing', 'observability', 'prometheus', 'grafana'],
-            SECURITY_COMPLIANCE_WEIGHT: ['security', 'authentication', 'authorization', 'compliance', 'encryption', 'oauth']
-        };
-        
-        return keywordMap[layer] || keywordMap[layer.toUpperCase()] || [];
-    }
+    // Convert layer name to keyword map key
+    const layerToKeyMap = {
+        'frontend_ui': 'FRONTEND_UI_WEIGHT',
+        'backend_api': 'BACKEND_API_WEIGHT',
+        'data_layer': 'DATA_LAYER_WEIGHT',
+        'ml_services_optional': 'ML_SERVICES_WEIGHT',
+        'devops_ci_cd': 'DEVOPS_CICD_WEIGHT',
+        'infra_runtime': 'INFRA_RUNTIME_WEIGHT',
+        'observability': 'OBSERVABILITY_WEIGHT',
+        'security_compliance': 'SECURITY_COMPLIANCE_WEIGHT'
+    };
+
+    const keywordMap = {
+        FRONTEND_UI_WEIGHT: ['frontend', 'ui', 'user interface', 'react', 'vue', 'angular', 'component', 'css', 'html', 'javascript'],
+        BACKEND_API_WEIGHT: ['backend', 'api', 'server', 'rest', 'graphql', 'microservice', 'service', 'endpoint', 'controller'],
+        DATA_LAYER_WEIGHT: ['database', 'data', 'storage', 'sql', 'nosql', 'mongodb', 'postgresql', 'redis', 'model', 'schema'],
+        ML_SERVICES_WEIGHT: ['machine learning', 'ml', 'ai', 'model', 'tensorflow', 'pytorch', 'data science', 'algorithm'],
+        DEVOPS_CICD_WEIGHT: ['devops', 'ci/cd', 'pipeline', 'docker', 'kubernetes', 'deployment', 'automation', 'jenkins'],
+        INFRA_RUNTIME_WEIGHT: ['infrastructure', 'cloud', 'aws', 'azure', 'gcp', 'container', 'kubernetes', 'runtime'],
+        OBSERVABILITY_WEIGHT: ['monitoring', 'logging', 'metrics', 'tracing', 'observability', 'prometheus', 'grafana'],
+        SECURITY_COMPLIANCE_WEIGHT: ['security', 'authentication', 'authorization', 'compliance', 'encryption', 'oauth']
+    };
+    
+    const keywordKey = layerToKeyMap[layer];
+    return keywordMap[keywordKey] || [];
+}
 
     /**
      * Build constraint prompts for LLM
