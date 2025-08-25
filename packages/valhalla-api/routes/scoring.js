@@ -62,12 +62,18 @@ router.post('/score', async (req, res) => {
 router.get('/debug', async (req, res) => {
   try {
     const matrixClient = new MatrixClient();
-    const matrix = matrixClient.getMatrix();
+    
+    // Use the correct method to load matrix
+    const matrix = await matrixClient.loadMatrix();
+    const layerWeights = await matrixClient.getLayerWeights();
+    const layerRequirements = await matrixClient.getLayerRequirements();
     
     // Show the actual structure
     res.json({
       matrixExists: !!matrix,
       matrixKeys: matrix ? Object.keys(matrix) : null,
+      layerWeights: layerWeights,
+      layerRequirements: layerRequirements,
       taxonomy: matrix?.TAXONOMY ? Object.keys(matrix.TAXONOMY) : null,
       layers: matrix?.TAXONOMY?.layers ? Object.keys(matrix.TAXONOMY.layers) : null,
       sampleLayer: matrix?.TAXONOMY?.layers ? Object.values(matrix.TAXONOMY.layers)[0] : null
