@@ -15,7 +15,7 @@ router.post('/score', async (req, res) => {
       });
     }
 
-    console.log('Scoring architecture text:', architecture.substring(0, 100) + '...');
+    if (process.env.DEBUG) console.log('Scoring architecture text:', architecture.substring(0, 100) + '...');
     
     // Use existing MatrixClient with all your blackbox algorithms
     const matrixClient = new MatrixClient();

@@ -55,9 +55,9 @@ app.use((err, req, res, next) => {
 
 // Start server
 app.listen(PORT, '0.0.0.0', () => {
-  console.log(`🏛️ VALHALLA API running on port ${PORT}`);
-  console.log(`Environment: ${process.env.NODE_ENV || 'development'}`);
-  console.log(`Health check: http://localhost:${PORT}/health`);
+  console.info(`🏛️ VALHALLA API running on port ${PORT}`);
+  console.info(`Environment: ${process.env.NODE_ENV || 'development'}`);
+  console.info(`Health check: http://localhost:${PORT}/health`);
 });
 
 module.exports = app;

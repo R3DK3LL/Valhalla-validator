@@ -18,7 +18,7 @@ class MatrixClient {
     async fetchEncryptedMatrix() {
         try {
             const url = `${this.githubRepo}/${this.matrixPath}`;
-            console.log(`Fetching encrypted matrix from: ${url}`);
+            if (process.env.DEBUG) console.log(`Fetching encrypted matrix from: ${url}`);
             
             const response = await axios.get(url, {
                 timeout: 10000,
@@ -85,12 +85,12 @@ class MatrixClient {
         // Check cache first
         const cached = this.cache.get(cacheKey);
         if (cached && (Date.now() - cached.timestamp < this.cacheTTL)) {
-            console.log('Using cached matrix');
+            if (process.env.DEBUG) console.log('Using cached matrix');
             return cached.matrix;
         }
         
         try {
-            console.log('Loading fresh matrix...');
+            if (process.env.DEBUG) console.log('Loading fresh matrix...');
             
             // Fetch encrypted matrix
             const encryptedData = await this.fetchEncryptedMatrix();
@@ -104,7 +104,7 @@ class MatrixClient {
                 timestamp: Date.now()
             });
             
-            console.log(`Matrix loaded successfully with ${Object.keys(matrix).length} top-level keys`);
+            if (process.env.DEBUG) console.log(`Matrix loaded successfully with ${Object.keys(matrix).length} top-level keys`);
             return matrix;
         } catch (error) {
             console.error('Matrix loading failed:', error.message);
@@ -367,7 +367,7 @@ class MatrixClient {
         const results = [];
         
         for (let attempt = 1; attempt <= maxAttempts; attempt++) {
-            console.log(`Gate evaluation attempt ${attempt}/${maxAttempts}`);
+            if (process.env.DEBUG) console.log(`Gate evaluation attempt ${attempt}/${maxAttempts}`);
             
             const score = await this.scoreArchitecture(architectureText);
             results.push(score);
@@ -384,7 +384,7 @@ class MatrixClient {
             
             // If not last attempt, provide feedback for regeneration
             if (attempt < maxAttempts) {
-                console.log(`Score ${score.percentage}% - ${score.tier}. Regeneration needed.`);
+                if (process.env.DEBUG) console.log(`Score ${score.percentage}% - ${score.tier}. Regeneration needed.`);
             }
         }
         
@@ -429,7 +429,7 @@ Remember: Focus on delivering a comprehensive architecture that addresses all we
      */
     clearCache() {
         this.cache.clear();
-        console.log('Matrix cache cleared');
+        if (process.env.DEBUG) console.log('Matrix cache cleared');
     }
 
     /**
